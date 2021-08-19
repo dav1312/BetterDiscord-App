@@ -43,7 +43,7 @@ body:
   id: terms
   attributes:
     label: Code of Conduct
-    description: By submitting this issue I made sure that this issue is caused and related to the BetterDiscordApp and not to a plugin or the BetterDiscord Installer
+    description: By submitting this issue I made sure that this issue is caused and related to the BetterDiscordApp and not to a plugin or the BetterDiscord Installer.
     options:
       - label: I agree to follow this project's Code of Conduct
         required: true
