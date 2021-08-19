@@ -40,10 +40,9 @@ body:
     label: Additional context
     description: Add any other context about the problem here.
 - type: checkboxes
-  id: terms
   attributes:
     label: Code of Conduct
-    description: By submitting this issue I made sure that this issue is caused and related to the BetterDiscordApp and not to a plugin or the BetterDiscord Installer.
+    description: By submitting this issue I made sure that this bug is caused and related to the BetterDiscordApp and not to a plugin, theme, the BetterDiscord Installer or the BetterDiscord Documentation.
     options:
       - label: I agree to follow this project's Code of Conduct
         required: true
