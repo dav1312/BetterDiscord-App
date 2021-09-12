@@ -15,9 +15,9 @@ import DiscordModules from "./discordmodules";
 import ComponentPatcher from "./componentpatcher";
 import Strings from "./strings";
 import IPC from "./ipc";
-import LoadingIcon from "../loadingicon";
 import Styles from "../styles/index.css";
 import Editor from "./editor";
+import { isRecoveryMode, showRecoveryNotice } from "./recoverymode";
 
 export default new class Core {
     async startup() {
@@ -40,7 +40,7 @@ export default new class Core {
 
         Logger.log("Startup", "Performing incompatibility checks");
         if (window.ED) return Modals.alert(Strings.Startup.notSupported, Strings.Startup.incompatibleApp.format({app: "EnhancedDiscord"}));
-        if (window.WebSocket && window.WebSocket.name && window.WebSocket.name.includes("Patched")) return Modals.alert(Strings.Startup.notSupported, Strings.Startup.incompatibleApp.format({app: "Powercord"}));
+        if (window?.WebSocket?.name && window.WebSocket.name.includes("Patched")) return Modals.alert(Strings.Startup.notSupported, Strings.Startup.incompatibleApp.format({app: "Powercord"}));
 
         Logger.log("Startup", "Getting update information");
         this.checkForUpdate();
@@ -68,6 +68,11 @@ export default new class Core {
             Builtins[module].initialize();
         }
 
+        if (isRecoveryMode()) {
+            Logger.log("Startup", "Detected Recovery Mode");
+            return showRecoveryNotice();
+        }
+
         Logger.log("Startup", "Loading Plugins");
         // const pluginErrors = [];
         const pluginErrors = PluginManager.initialize();
@@ -75,9 +80,6 @@ export default new class Core {
         Logger.log("Startup", "Loading Themes");
         // const themeErrors = [];
         const themeErrors = ThemeManager.initialize();
-
-        Logger.log("Startup", "Removing Loading Icon");
-        LoadingIcon.hide();
 
         // Show loading errors
         Logger.log("Startup", "Collecting Startup Errors");

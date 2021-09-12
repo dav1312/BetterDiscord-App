@@ -4,6 +4,7 @@ import electron from "electron";
 
 import ReactDevTools from "./reactdevtools";
 import * as IPCEvents from "common/constants/ipcevents";
+import { RECOVERY_MODE_KEY } from "common/constants/recoverymode";
 
 // Build info file only exists for non-linux (for current injection)
 const appPath = electron.app.getAppPath();
@@ -16,6 +17,9 @@ else dataPath = process.env.XDG_CONFIG_HOME ? process.env.XDG_CONFIG_HOME : path
 dataPath = path.join(dataPath, "BetterDiscord") + "/";
 
 let hasCrashed = false;
+let recoveryMode = process.argv.includes("--recovery");
+let wasRecoveryMode = false;
+
 export default class BetterDiscord {
     static getWindowPrefs() {
         if (!fs.existsSync(buildInfoFile)) return {};
@@ -60,6 +64,9 @@ export default class BetterDiscord {
         const location = path.join(__dirname, "renderer.js");
         if (!fs.existsSync(location)) return; // TODO: cut a fatal log
         const content = fs.readFileSync(location).toString();
+
+        if (recoveryMode) await browserWindow.webContents.executeJavaScript(`window.${RECOVERY_MODE_KEY} = true;`);
+        
         const success = await browserWindow.webContents.executeJavaScript(`
             (() => {
                 try {
@@ -90,15 +97,30 @@ export default class BetterDiscord {
 
         // When DOM is available, pass the renderer over the wall
         browserWindow.webContents.on("dom-ready", () => {
-            if (!hasCrashed) return this.injectRenderer(browserWindow);
-
-            // If a previous crash was detected, show a message explaining why BD isn't there
+            if (hasCrashed) {
+                if (recoveryMode) {
+                    // If a previous crash was detected, show a message explaining why BD went into recovery mode
             electron.dialog.showMessageBox({
                 title: "BetterDiscord Crashed",
                 type: "warning",
                 message: "BetterDiscord seems to have crashed your Discord client.",
+                        detail: "BetterDiscord automatically went into recovery mode. Try removing all your plugins then restarting Discord."
+                    });
+                } else {
+                    // If a crash was detected in recovery mode, show a message explaining why BD isn't there
+                    electron.dialog.showMessageBox({
+                        title: "BetterDiscord Recovery Mode Crashed",
+                        type: "warning",
+                        message: "BetterDiscord seems to have crashed your Discord client.",
                 detail: "BetterDiscord has automatically disabled itself temporarily. Try removing all your plugins then restarting Discord."
             });
+                }
+            }
+
+            if (!hasCrashed || recoveryMode) this.injectRenderer(browserWindow);
+
+            wasRecoveryMode = recoveryMode;
+            recoveryMode = false;
             hasCrashed = false;
         });
 
@@ -109,6 +131,7 @@ export default class BetterDiscord {
 
         browserWindow.webContents.on("render-process-gone", () => {
             hasCrashed = true;
+            if (!wasRecoveryMode) recoveryMode = true;
         });
     }
 }
