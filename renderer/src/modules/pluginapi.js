@@ -234,7 +234,7 @@ BdApi.monkeyPatch = function(what, methodName, options) {
             return patchReturn;
         }
         catch (err) {
-            Logger.err(`${callerId}:monkeyPatch`, `Error in the ${patchType} of ${methodName}`);
+            Logger.err(`${callerId}:monkeyPatch`, `Error in the ${patchType} of ${methodName}`, err);
         }
     });
     return data.cancelPatch;
