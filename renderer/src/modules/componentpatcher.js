@@ -197,9 +197,9 @@ export default new class ComponentPatcher {
             if (!children || Developers.indexOf(user.id) < 0) return;
             if (!Array.isArray(children)) return;
             children.push(
-               React.createElement(DeveloperBadge, {
-                   type: "member"
-               })
+                React.createElement(DeveloperBadge, {
+                    type: "member"
+                })
             );
         });
     }

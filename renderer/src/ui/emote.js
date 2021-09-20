@@ -51,32 +51,32 @@ export default class BDEmote extends React.Component {
 
     render() {
         return React.createElement(TooltipWrapper, {
-                color: "primary",
-                position: "top",
-                text: this.label,
-                delay: 750
-            },
-            (childProps) => {
-                return React.createElement("div", Object.assign({
-                    className: "emotewrapper" + (this.props.jumboable ? " jumboable" : ""),
-                    onMouseEnter: this.onMouseEnter,
-                    onMouseLeave: this.onMouseLeave,
-                    onClick: this.onClick
-                }, childProps),
-                    React.createElement("img", {
-                        draggable: false,
-                        className: "emote" + this.modifierClass + (this.props.jumboable ? " jumboable" : "") + (!this.state.shouldAnimate ? " stop-animation" : ""),
-                        dataModifier: this.props.modifier,
-                        alt: this.label,
-                        src: this.props.url
-                    }),
-                    React.createElement("input", {
-                        className: "fav" + (this.state.isFavorite ? " active" : ""),
-                        title: Strings.Emotes.favoriteAction,
-                        type: "button",
-                        onClick: this.toggleFavorite
-                    })
-                );
-            });
+            color: "primary",
+            position: "top",
+            text: this.label,
+            delay: 750
+        },
+        (childProps) => {
+            return React.createElement("div", Object.assign({
+                className: "emotewrapper" + (this.props.jumboable ? " jumboable" : ""),
+                onMouseEnter: this.onMouseEnter,
+                onMouseLeave: this.onMouseLeave,
+                onClick: this.onClick
+            }, childProps),
+            React.createElement("img", {
+                draggable: false,
+                className: "emote" + this.modifierClass + (this.props.jumboable ? " jumboable" : "") + (!this.state.shouldAnimate ? " stop-animation" : ""),
+                dataModifier: this.props.modifier,
+                alt: this.label,
+                src: this.props.url
+            }),
+            React.createElement("input", {
+                className: "fav" + (this.state.isFavorite ? " active" : ""),
+                title: Strings.Emotes.favoriteAction,
+                type: "button",
+                onClick: this.toggleFavorite
+            })
+            );
+        });
     }
 }

@@ -104,21 +104,21 @@ export default class FloatingWindow extends React.Component {
         const className = `floating-window${` ${this.props.className}` || ""}${this.props.resizable ? " resizable" : ""}${this.state.modalOpen ? " modal-open" : ""}`;
         const styles = {height: this.props.height, width: this.props.width, left: left || 0, top: top || 0};
         return <div id={this.props.id} className={className} ref={this.window} style={styles}>
-                    <div className="floating-window-titlebar" ref={this.titlebar}>
-                        <span className="title">{this.props.title}</span>
-                        <div className="floating-window-buttons">
-                            <div className="button maximize-button" onClick={this.maximize}>
-                                <MaximizeIcon size="18px" />
-                            </div>
-                            <div className="button close-button" onClick={this.close}>
-                                <CloseButton />
-                            </div>
-                        </div>
+            <div className="floating-window-titlebar" ref={this.titlebar}>
+                <span className="title">{this.props.title}</span>
+                <div className="floating-window-buttons">
+                    <div className="button maximize-button" onClick={this.maximize}>
+                        <MaximizeIcon size="18px" />
                     </div>
-                    <div className="floating-window-content">
-                        {this.props.children}
+                    <div className="button close-button" onClick={this.close}>
+                        <CloseButton />
                     </div>
-                </div>;
+                </div>
+            </div>
+            <div className="floating-window-content">
+                {this.props.children}
+            </div>
+        </div>;
     }
 
     maximize() {

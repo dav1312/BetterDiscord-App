@@ -173,15 +173,15 @@ export default class PublicServers extends React.Component {
 
     get loadingScreen() {
         return <div className="bd-card-list">
-                <div className="bd-placeholder-card"></div>
-                <div className="bd-placeholder-card"></div>
-                <div className="bd-placeholder-card"></div>
-                <div className="bd-placeholder-card"></div>
-                <div className="bd-placeholder-card"></div>
-                <div className="bd-placeholder-card"></div>
-                <div className="bd-placeholder-card"></div>
-                <div className="bd-placeholder-card"></div>
-            </div>;
+            <div className="bd-placeholder-card"></div>
+            <div className="bd-placeholder-card"></div>
+            <div className="bd-placeholder-card"></div>
+            <div className="bd-placeholder-card"></div>
+            <div className="bd-placeholder-card"></div>
+            <div className="bd-placeholder-card"></div>
+            <div className="bd-placeholder-card"></div>
+            <div className="bd-placeholder-card"></div>
+        </div>;
     }
 
     get pagination() {
@@ -203,10 +203,10 @@ export default class PublicServers extends React.Component {
 
     render() {
         const keywords = this.keywords.map(name => ({
-                section: name,
-                label: name,
-                element: () => this.content
-            })
+            section: name,
+            label: name,
+            element: () => this.content
+        })
         );
         return React.createElement(SettingsView, {
             onClose: this.props.close,

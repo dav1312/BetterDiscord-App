@@ -17,11 +17,13 @@
         "react/jsx-key": "off",
         "react/jsx-no-target-blank": "error",
         "react/jsx-uses-react": "error",
-        "react/jsx-uses-vars": "error"
+        "react/jsx-uses-vars": "error",
+        "indent": ["error", 4]
     },
     "globals": {
         "webpackJsonp": "readonly",
-        
+        "setImmediate": "readonly",
+
         "alert": "off",
         "blur": "off",
         "caches": "off",

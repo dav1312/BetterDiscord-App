@@ -136,9 +136,9 @@ export default new class Core {
             const request = require("request");
             const buff = await new Promise((resolve, reject) =>
                 request(asar.url, {encoding: null, headers: {"User-Agent": "BetterDiscord Updater", "Accept": "application/octet-stream"}}, (err, resp, body) => {
-                if (err || resp.statusCode != 200) return reject(err || `${resp.statusCode} ${resp.statusMessage}`);
-                return resolve(body);
-            }));
+                    if (err || resp.statusCode != 200) return reject(err || `${resp.statusCode} ${resp.statusMessage}`);
+                    return resolve(body);
+                }));
 
             const asarPath = path.join(DataStore.baseFolder, "betterdiscord.asar");
             const fs = require("original-fs");

@@ -86,8 +86,8 @@ export default class AddonCard extends React.Component {
     buildTitle(name, version, author) {
         const authorArray = Strings.Addons.byline.split(/({{[A-Za-z]+}})/);
         const authorComponent = author.link || author.id
-                                ? <a className="bd-link bd-link-website" href={author.link || null} onClick={this.messageAuthor} target="_blank" rel="noopener noreferrer">{author.name}</a>
-                                : <span className="bd-author">{author.name}</span>;
+            ? <a className="bd-link bd-link-website" href={author.link || null} onClick={this.messageAuthor} target="_blank" rel="noopener noreferrer">{author.name}</a>
+            : <span className="bd-author">{author.name}</span>;
 
         const authorIndex = authorArray.findIndex(s => s == "{{author}}");
         if (authorIndex) authorArray[authorIndex] = authorComponent;
@@ -123,36 +123,36 @@ export default class AddonCard extends React.Component {
 
     get controls() { // {this.props.hasSettings && <button onClick={this.showSettings} className="bd-button bd-button-addon-settings" disabled={!this.props.enabled}>{Strings.Addons.addonSettings}</button>}
         return <div className="bd-controls">
-                    {this.props.hasSettings && this.makeControlButton(Strings.Addons.addonSettings, <CogIcon size={"20px"} />, this.showSettings, {disabled: !this.props.enabled})}
-                    {this.props.showReloadIcon && this.makeControlButton(Strings.Addons.reload, <ReloadIcon size={"20px"} />, this.reload)}
-                    {this.props.editAddon && this.makeControlButton(Strings.Addons.editAddon, <EditIcon size={"20px"} />, this.props.editAddon)}
-                    {this.props.deleteAddon && this.makeControlButton(Strings.Addons.deleteAddon, <DeleteIcon size={"20px"} />, this.props.deleteAddon, {danger: true})}
-                </div>;
+            {this.props.hasSettings && this.makeControlButton(Strings.Addons.addonSettings, <CogIcon size={"20px"} />, this.showSettings, {disabled: !this.props.enabled})}
+            {this.props.showReloadIcon && this.makeControlButton(Strings.Addons.reload, <ReloadIcon size={"20px"} />, this.reload)}
+            {this.props.editAddon && this.makeControlButton(Strings.Addons.editAddon, <EditIcon size={"20px"} />, this.props.editAddon)}
+            {this.props.deleteAddon && this.makeControlButton(Strings.Addons.deleteAddon, <DeleteIcon size={"20px"} />, this.props.deleteAddon, {danger: true})}
+        </div>;
     }
 
     get footer() {
         const links = ["website", "source", "invite", "donate", "patreon"];
         const linkComponents = links.map(this.buildLink.bind(this)).filter(c => c);// linkComponents.map((comp, i) => i < linkComponents.length - 1 ? [comp, " | "] : comp).flat()
         return <div className="bd-footer">
-                    <span className="bd-links">{linkComponents}</span> 
-                    {this.controls}
-                </div>;
+            <span className="bd-links">{linkComponents}</span> 
+            {this.controls}
+        </div>;
     }
 
     makeButton(title, children, action) {
         return <Tooltip color="primary" position="top" text={title}>
-                    {(props) => {
-                        return <div {...props} className="bd-addon-button" onClick={action}>{children}</div>;
-                    }}
-                </Tooltip>;
+            {(props) => {
+                return <div {...props} className="bd-addon-button" onClick={action}>{children}</div>;
+            }}
+        </Tooltip>;
     }
 
     makeControlButton(title, children, action, {danger = false, disabled = false} = {}) {
         return <Tooltip color="primary" position="top" text={title}>
-                    {(props) => {
-                        return <button {...props} className={"bd-button bd-addon-button" + (danger ? " bd-button-danger" : "") + (disabled ? " bd-button-disabled" : "")} onClick={action}>{children}</button>;
-                    }}
-                </Tooltip>;
+            {(props) => {
+                return <button {...props} className={"bd-button bd-addon-button" + (danger ? " bd-button-danger" : "") + (disabled ? " bd-button-disabled" : "")} onClick={action}>{children}</button>;
+            }}
+        </Tooltip>;
     }
 
     render() {
@@ -163,14 +163,14 @@ export default class AddonCard extends React.Component {
         const version = this.getString(addon.version);
 
         return <div id={`${addon.id}-card`} className="bd-addon-card settings-closed">
-                    <div className="bd-addon-header">
-                            {this.props.type === "plugin" ? <ExtIcon size="18px" className="bd-icon" /> : <ThemeIcon size="18px" className="bd-icon" />}
-                            <div className="bd-title">{this.buildTitle(name, version, {name: author, id: this.props.addon.authorId, link: this.props.addon.authorLink})}</div>
-                            <Switch checked={this.props.enabled} onChange={this.onChange} />
-                    </div>
-                    <div className="bd-description-wrap"><div className="bd-description">{SimpleMarkdown.parseToReact(description)}</div></div>
-                    {this.footer}
-                </div>;
+            <div className="bd-addon-header">
+                {this.props.type === "plugin" ? <ExtIcon size="18px" className="bd-icon" /> : <ThemeIcon size="18px" className="bd-icon" />}
+                <div className="bd-title">{this.buildTitle(name, version, {name: author, id: this.props.addon.authorId, link: this.props.addon.authorLink})}</div>
+                <Switch checked={this.props.enabled} onChange={this.onChange} />
+            </div>
+            <div className="bd-description-wrap"><div className="bd-description">{SimpleMarkdown.parseToReact(description)}</div></div>
+            {this.footer}
+        </div>;
     }
 }
 

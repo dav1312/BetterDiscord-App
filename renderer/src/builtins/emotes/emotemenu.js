@@ -56,7 +56,7 @@ export default new class EmoteMenu extends Builtin {
                             viewType: "bd-emotes",
                             isActive: isActive,
                         }, "Twitch")
-                    ));
+                        ));
                     if (isActive) {
                         body.push(
                             React.createElement(EmoteMenuCard, {

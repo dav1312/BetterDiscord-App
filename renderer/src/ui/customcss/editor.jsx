@@ -78,10 +78,10 @@ export default class CodeEditor extends React.Component {
 
     makeButton(button) {
         return <Tooltip color="primary" position="top" text={button.tooltip}>
-                    {props => {
-                        return <button {...props} className="btn btn-primary" onClick={(event) => {button.onClick(event, this.value);}}>{button.label}</button>;
-                    }}
-                </Tooltip>;
+            {props => {
+                return <button {...props} className="btn btn-primary" onClick={(event) => {button.onClick(event, this.value);}}>{button.label}</button>;
+            }}
+        </Tooltip>;
     }
 
     render() {
@@ -91,17 +91,17 @@ export default class CodeEditor extends React.Component {
         const controlsRight = this.props.controls.filter(c => c.side == "right").map(this.buildControl.bind(this));
 
         return <div id="bd-editor-panel" className={this.props.theme}>
-                    <div id="bd-editor-controls">
-                        <div className="controls-section controls-left">
-                            {controlsLeft}
-                        </div>
-                        <div className="controls-section controls-right">
-                            {controlsRight}
-                        </div>
-                    </div>
-                    <div className="editor-wrapper">
-                        <div id={this.props.id} className={"editor " + this.props.theme}></div>
-                    </div>
-                </div>;
+            <div id="bd-editor-controls">
+                <div className="controls-section controls-left">
+                    {controlsLeft}
+                </div>
+                <div className="controls-section controls-right">
+                    {controlsRight}
+                </div>
+            </div>
+            <div className="editor-wrapper">
+                <div id={this.props.id} className={"editor " + this.props.theme}></div>
+            </div>
+        </div>;
     }
 }

@@ -48,9 +48,9 @@ export default class Select extends React.Component {
         const style = this.props.style == "transparent" ? " bd-select-transparent" : "";
         const isOpen = this.state.open ? " menu-open" : "";
         return <div className={`bd-select${style}${isOpen}`} onClick={this.showMenu} ref={this.dropdown}>
-                    <div className="bd-select-value">{this.selected.label}</div>
-                    <Arrow className="bd-select-arrow" />
-                    {this.state.open && this.options}
-                </div>;
+            <div className="bd-select-value">{this.selected.label}</div>
+            <Arrow className="bd-select-arrow" />
+            {this.state.open && this.options}
+        </div>;
     }
 }

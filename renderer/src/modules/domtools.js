@@ -32,7 +32,7 @@
  * @property {number} width - Outer width of the target element.
  */
 
- /**
+/**
  * Function that automatically removes added listener.
  * @callback module:DOMTools~CancelListener
  */
@@ -93,21 +93,21 @@ export default class DOMTools {
         const start = performance.now();
       
         requestAnimationFrame(function animate(time) {
-          // timeFraction goes from 0 to 1
-          let timeFraction = (time - start) / duration;
-          if (timeFraction > 1) timeFraction = 1;
+            // timeFraction goes from 0 to 1
+            let timeFraction = (time - start) / duration;
+            if (timeFraction > 1) timeFraction = 1;
       
-          // calculate the current animation state
-          const progress = timing(timeFraction);
+            // calculate the current animation state
+            const progress = timing(timeFraction);
       
-          update(progress); // draw it
+            update(progress); // draw it
       
-          if (timeFraction < 1) {
-            requestAnimationFrame(animate);
-          }
+            if (timeFraction < 1) {
+                requestAnimationFrame(animate);
+            }
       
         });
-      }
+    }
 
     /**
      * This is my shit version of not having to use `$` from jQuery. Meaning

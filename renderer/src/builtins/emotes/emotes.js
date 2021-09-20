@@ -28,7 +28,7 @@ const blocklist = [];
 const overrides = ["twitch", "subscriber", "bttv", "ffz"];
 const modifiers = ["flip", "spin", "pulse", "spin2", "spin3", "1spin", "2spin", "3spin", "tr", "bl", "br", "shake", "shake2", "shake3", "flap"];
 
- export default new class EmoteModule extends Builtin {
+export default new class EmoteModule extends Builtin {
     get name() {return "Emotes";}
     get collection() {return "settings";}
     get category() {return "general";}
@@ -231,9 +231,9 @@ const modifiers = ["flip", "spin", "pulse", "spin2", "spin3", "1spin", "2spin", 
             this.log(`Downloading emotes from: ${asar.url}`);
             const buff = await new Promise((resolve, reject) =>
                 request(asar.url, {encoding: null, headers: {"User-Agent": "BetterDiscord Emotes", "Accept": "application/octet-stream"}}, (err, resp, body) => {
-                if (err || resp.statusCode != 200) return reject(err || `${resp.statusCode} ${resp.statusMessage}`);
-                return resolve(body);
-            }));
+                    if (err || resp.statusCode != 200) return reject(err || `${resp.statusCode} ${resp.statusMessage}`);
+                    return resolve(body);
+                }));
 
             this.log("Successfully downloaded emotes.asar");
             const asarPath = this.asarPath;

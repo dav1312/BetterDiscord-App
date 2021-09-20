@@ -8,9 +8,9 @@ export default class SettingsTitle extends React.Component {
         const baseClass = this.props.isGroup ? className2 : className;
         const titleClass = this.props.className ? `${baseClass} ${this.props.className}` : baseClass;
         return <h2 className={titleClass} onClick={() => {this.props.onClick && this.props.onClick();}}>
-                {this.props.text}
-                {this.props.button && <button className="bd-button bd-button-title" onClick={this.props.button.onClick}>{this.props.button.title}</button>}
-                {this.props.otherChildren}
-                </h2>;
+            {this.props.text}
+            {this.props.button && <button className="bd-button bd-button-title" onClick={this.props.button.onClick}>{this.props.button.title}</button>}
+            {this.props.otherChildren}
+        </h2>;
     }
 }
