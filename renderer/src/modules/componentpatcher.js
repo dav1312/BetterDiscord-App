@@ -67,7 +67,7 @@ export default new class ComponentPatcher {
                 children[children.length - 2].type = newOne;
             }
 
-            const additional = DiscordModules.React.createElement("div", {className: "colorMuted-HdFt4q size12-3cLvbJ"}, `BetterDiscord ${Config.version}`);
+            const additional = DiscordModules.React.createElement("div", {className: "colorMuted-20987_ size12-oc4dx4"}, `BetterDiscord ${Config.version}`);
 
 
             const originalVersions = children[children.length - 1].type;
